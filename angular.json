@@ -22,7 +22,10 @@
             "tsConfig": "apps/swapi/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/swapi/src/favicon.ico", "apps/swapi/src/assets"],
-            "styles": ["apps/swapi/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/swapi/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -113,6 +116,37 @@
             "tsConfig": ["apps/swapi-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/swapi-e2e/**"]
           }
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "swapi",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
+            "tsConfig": "libs/material/tsconfig.spec.json",
+            "setupFile": "libs/material/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }
