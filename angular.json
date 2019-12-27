@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "projects": {
+    "swapi": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/swapi",
+      "sourceRoot": "apps/swapi/src",
+      "prefix": "swapi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/swapi",
+            "index": "apps/swapi/src/index.html",
+            "main": "apps/swapi/src/main.ts",
+            "polyfills": "apps/swapi/src/polyfills.ts",
+            "tsConfig": "apps/swapi/tsconfig.app.json",
+            "aot": false,
+            "assets": ["apps/swapi/src/favicon.ico", "apps/swapi/src/assets"],
+            "styles": ["apps/swapi/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/swapi/src/environments/environment.ts",
+                  "with": "apps/swapi/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "swapi:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "swapi:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "swapi:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/swapi/tsconfig.app.json",
+              "apps/swapi/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/swapi/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/swapi/jest.config.js",
+            "tsConfig": "apps/swapi/tsconfig.spec.json",
+            "setupFile": "apps/swapi/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "swapi-e2e": {
+      "root": "apps/swapi-e2e",
+      "sourceRoot": "apps/swapi-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/swapi-e2e/cypress.json",
+            "tsConfig": "apps/swapi-e2e/tsconfig.e2e.json",
+            "devServerTarget": "swapi:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "swapi:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/swapi-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/swapi-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "swapi"
+}
