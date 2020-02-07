@@ -1,0 +1,17 @@
+<div class="container">
+    <!-- PROJECTS LIST -->
+    <div class="col-50">
+      <swapi-people-list [person]="person$ | async"
+                          (selected)="selectPerson($event)"
+                          (deleted)="deletePerson($event)">
+      </swapi-people-list>
+    </div>
+    <!-- PROJECT DETAILS -->
+    <div class="col-50">
+     <swapi-people-details [person]="selectedPerson"
+                            (saved)="savePerson($event)"
+                            (cancelled)="cancel()"
+                            >
+     </swapi-people-details>
+    </div>
+  </div>

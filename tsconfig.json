@@ -16,7 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@swapi/material": ["libs/material/src/index.ts"]
+      "@swapi/material": ["libs/material/src/index.ts"],
+      "@swapi/core-data": ["libs/core-data/src/index.ts"],
+      "@swapi/ui-login": ["libs/ui-login/src/index.ts"],
+      "@swapi/ui-toolbar": ["libs/ui-toolbar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -11,6 +11,7 @@
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
+    "deploy": "ng build --prod && cp ./dist/apps/swapi/index.html ./dist/apps/swapi/200.html && surge ./dist/apps/swapi/ https://colemans-first-app.surge.sh",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:e2e": "nx affected:e2e",
